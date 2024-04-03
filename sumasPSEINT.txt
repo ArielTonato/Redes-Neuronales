@@ -68,8 +68,9 @@ firewall-cmd --add-service=squid --permanent
 firewall-cmd --reload
 systemctl restart squid
 
-
-///PARA JOOMLA	
+wget https://downloads.joomla.org/es/cms/joomla4/4-4-3/Joomla_4-4-3-Stable-Full_Package.zip?format=zip
+///PARA JOOMLA
+	
 sudo chown -R apache:apache /var/www/html
 sudo chmod -R 775 /var/www/html
 nano /etc/httpd/conf.d/joomla.conf
