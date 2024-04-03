@@ -1,0 +1,46 @@
+python 
+
+pip install numpy
+pip install matplotlib
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = 10000
+edad = np.random.randint(16, 21, size=data)
+peso = np.random.randint(100, 181, size=data)
+precio = np.random.randint(1, 121, size=data)
+rows = 10
+columns = 1000
+
+dataSetEdadPeso = np.column_stack((edad, peso))
+
+print("Media:", np.mean(dataSetEdadPeso, axis=0))
+print("Moda:", np.argmax(np.bincount(dataSetEdadPeso.flatten())))
+print("Mediana:", np.median(dataSetEdadPeso, axis=0))
+
+plt.figure(figsize=(10, 8))
+
+plt.subplot(2, 2, 1)
+plt.hist(dataSetEdadPeso[:, 0])
+plt.title("Histograma Edad")
+
+plt.subplot(2, 2, 2)
+plt.hist(dataSetEdadPeso[:, 1])
+plt.title("Histograma Peso")
+
+edadReshape = np.reshape(dataSetEdadPeso[:, 0], (rows, columns))
+pesoReshape = np.reshape(dataSetEdadPeso[:, 1], (rows, columns))
+edadMean = np.mean(edadReshape, axis=1)
+pesoMean = np.mean(pesoReshape, axis=1)
+
+plt.subplot(2, 2, 3)
+plt.hist(edadMean)
+plt.title("Histograma Media de Edad")
+
+plt.subplot(2, 2, 4)
+plt.hist(pesoMean)
+plt.title("Histograma Media de Peso")
+
+plt.tight_layout()
+plt.show()

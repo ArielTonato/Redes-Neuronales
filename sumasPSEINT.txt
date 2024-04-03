@@ -1,0 +1,70 @@
+para instalar httpd 
+
+hostnamectl hostname S - WD
+
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=htts
+firewall-cmd --reload
+
+Para php 
+
+yum install php -y
+dnf install php-cli php-fpm php-curl php-mysqlnd php-gd php-opcache php-zip php-intl php-common php-bcmath php-imagick php-xml
+--comandos de la hoja
+yum install php-mysqlnd -y
+systemctl start php-fpm
+systemctl restart httpd
+
+setenforce 0
+
+Instalar wordpress 
+
+yum install wget unzip nano -y
+
+cd /var/www/html
+wget --link
+unzip --nombre
+
+1.- Configurar wordpress
+
+Para mysql en otra maquina
+
+yum install mysql mysql-server -y
+systemctl start mysqld
+systemctl enable mysqld
+mysql_secure_installation : 
+ 
+	-RENAME USER 'root'@'localhost' TO 'root'@'%'
+
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-port=3306/tcp
+firewall-cmd --reload
+setenforce 0
+
+
+Para squid
+
+yum install epel-release -y 
+yum install squid -y
+systemctl start squid
+systemctl enable squid
+
+cd /etc/squid
+
+cp squid.conf squid.conf.bak
+nano --cosas por bloquear
+nano squid.conf
+ - acl --nombre (si es pagina esto) dstdomain "/etc/squid/--nombre"
+ - acl --nombre (si es palabras) urlregex "/etc/squid/--nombre"
+	--Comentamos las dos de arriba y la una de abajo
+
+  http_access deny --nombre
+  http_access allow all
+
+firewall-cmd --add-service=squid --permanent
+firewall-cmd --reload
+systemctl restart squid
+

@@ -1,0 +1,30 @@
+data = 10000;
+edad = randi([16, 20],data,1);
+peso = randi([100, 180],data,1);
+precio = randi([1,120], data, 1);
+rows = 10;
+columns = 1000;
+
+dataSetEdadPeso = [edad, peso];
+
+mean(dataSetEdadPeso)
+mode(dataSetEdadPeso)
+median(dataSetEdadPeso)
+
+subplot(2,2,1)
+histogram(dataSetEdadPeso(:,1))
+subplot(2,2,2)
+histogram(dataSetEdadPeso(:,2))
+
+edadReshape = reshape(dataSetEdadPeso(:,1),rows,columns);
+pesoReshape = reshape(dataSetEdadPeso(:,2),rows,columns);
+edadMean = mean(edadReshape);
+pesoMean = mean(pesoReshape);
+
+subplot(2,2,3)
+histogram(edadMean)
+title("Histograma Edad")
+
+subplot(2,2,4)
+histogram(pesoMean)
+title("Histograma peso")

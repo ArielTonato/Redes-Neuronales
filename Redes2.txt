@@ -1,0 +1,43 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generar datos aleatorios
+data = 10000
+edad = np.random.randint(16, 21, data)
+peso = np.random.randint(100, 181, data)
+precio = np.random.randint(1, 121, data)
+
+# Crear un DataFrame con los datos de edad y peso
+dataSetEdadPeso = pd.DataFrame({'Edad': edad, 'Peso': peso})
+
+# Calcular la media, moda y mediana
+mean_edad = np.mean(edad)
+mode_edad = int(pd.Series(edad).mode())
+median_edad = np.median(edad)
+
+mean_peso = np.mean(peso)
+mode_peso = int(pd.Series(peso).mode())
+median_peso = np.median(peso)
+
+# Visualizar histogramas
+fig, axs = plt.subplots(2, 2, figsize=(10, 10))
+axs[0, 0].hist(edad, bins=10)
+axs[0, 0].set_title('Histograma de Edad')
+axs[0, 1].hist(peso, bins=10)
+axs[0, 1].set_title('Histograma de Peso')
+
+# Reorganizar los datos y calcular la media
+rows = 10
+columns = 1000
+edad_reshape = np.reshape(edad, (rows, columns))
+peso_reshape = np.reshape(peso, (rows, columns))
+edad_mean = np.mean(edad_reshape, axis=1)
+peso_mean = np.mean(peso_reshape, axis=1)
+
+axs[1, 0].hist(edad_mean, bins=10)
+axs[1, 0].set_title('Histograma de Media de Edad')
+axs[1, 1].hist(peso_mean, bins=10)
+axs[1, 1].set_title('Histograma de Media de Peso')
+
+plt.show()
